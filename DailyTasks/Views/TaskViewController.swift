@@ -20,6 +20,7 @@ class TaskViewController: UIViewController, TaskView, TaskDetailDelegate {
     
     func displayTasks(_ tasks: [MyTask]) {
         mainView.tableView.reloadData()
+        presentFooter()
     }
     
     override func loadView() {
@@ -48,7 +49,12 @@ class TaskViewController: UIViewController, TaskView, TaskDetailDelegate {
         mainView.tableView.register(MyTaskCell.self, forCellReuseIdentifier: "TableCellId")
         
         view.addSubview(footerView)
+    }
+    
+    func presentFooter(){
+       
         footerView.label.text = "\(presenter.numberOfTasks()) задач"
+        print(presenter.numberOfTasks())
         footerView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, height: 100)
         footerView.addTask = { [weak self] in
             self?.presenter.addNewTask()

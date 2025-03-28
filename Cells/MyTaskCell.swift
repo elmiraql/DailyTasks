@@ -22,7 +22,7 @@ class MyTaskCell: UITableViewCell {
     }
     
     var stateChanged: ((Bool) -> ())?
-    var isCompleted: Bool = false
+//    var isCompleted: Bool = false
     
     var doneButton: UIButton = {
         let button = UIButton()
@@ -103,9 +103,9 @@ class MyTaskCell: UITableViewCell {
         dateLabel.text = "23/03/2025"
         taskDescriptionLabel.text = task.taskText
         doneButton.isSelected = task.completed ?? false
-        isCompleted = task.completed ?? false
+//        isCompleted = task.completed ?? false
         
-        strikeTroughText(isCompleted: task.completed ?? false, text: task.todo ?? "")
+        strikeTroughText(isCompleted: doneButton.isSelected, text: task.todo ?? "")
     }
     
     @objc private func changeState() {
@@ -120,13 +120,13 @@ class MyTaskCell: UITableViewCell {
     func strikeTroughText(isCompleted: Bool, text: String){
         if doneButton.isSelected {
             let attributedString = NSMutableAttributedString(string: text)
-               attributedString.addAttribute(.strikethroughStyle,
-                                              value: NSUnderlineStyle.single.rawValue,
-                                             range: NSRange(location: 0, length: isCompleted ? (text.count ?? 0) : 0))
-               titleLabel.attributedText = attributedString
-           } else {
-               titleLabel.attributedText = NSAttributedString(string: text)
-           }
+            attributedString.addAttribute(.strikethroughStyle,
+                                          value: NSUnderlineStyle.single.rawValue,
+                                          range: NSRange(location: 0, length: isCompleted ? (text.count ?? 0) : 0))
+            titleLabel.attributedText = attributedString
+        } else {
+            titleLabel.attributedText = NSAttributedString(string: text)
+        }
     }
     
 }
